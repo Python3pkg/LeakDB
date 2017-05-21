@@ -17,10 +17,10 @@ class LeakQueue(object):
         :param int workers: the number of workers, default=10.
         """
         self.queue = JoinableQueue(maxsize=maxsize)
-        [spawn(self.worker) for x in xrange(workers)]
+        [spawn(self.worker) for x in range(workers)]
 
     def __repr__(self):
-        return u'{} items in queue'.format(self.queue.qsize())
+        return '{} items in queue'.format(self.queue.qsize())
 
     def put(self, operation, item, date=None):
         """ Each item are queued for a later processing.

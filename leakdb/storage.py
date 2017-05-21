@@ -11,7 +11,7 @@ from leakdb.queue import LeakQueue
 class DefaultStorage(dict):
 
     def __repr__(self):
-        return u'{} items in storage memory'.format(len(self))
+        return '{} items in storage memory'.format(len(self))
 
     def set(self, key, value, key_prefix=None):
         """
@@ -38,7 +38,7 @@ class DefaultStorage(dict):
 
         :returns: True if all insertion succeeds, false otherwise.
         """
-        return all([self.set(k, v, key_prefix) for k, v in mapping.items()])
+        return all([self.set(k, v, key_prefix) for k, v in list(mapping.items())])
 
     def incr(self, key, delta=1, initial_value=None):
         """
@@ -168,7 +168,7 @@ class PersistentStorage(DefaultStorage):
 
     def __repr__(self):
         size = path.getsize(self.filename)
-        return u"{} {} bytes :: {}".format(self.filename, size, super(PersistentStorage, self).__repr__())
+        return "{} {} bytes :: {}".format(self.filename, size, super(PersistentStorage, self).__repr__())
 
 
 class PersistentQueueStorage(PersistentStorage, QueueStorage):
